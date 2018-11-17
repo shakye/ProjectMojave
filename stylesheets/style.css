@@ -1,0 +1,18 @@
+.inputs{
+    background-color: #dcdfe5;
+    border-color: grey;
+    border-right-style: hidden;
+    border-top-style: hidden;
+    border-left-style: hidden;
+    border-radius: 6px;
+    margin-left: 5%;
+    width: 100%;
+    display: inline-block;
+}
+.signDate input[type="date"] {
+    width: 30%;
+}
+.footerText {
+    margin: 0;
+    font-size:12px;
+}

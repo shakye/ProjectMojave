@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+            Home
+        </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+        <script src="scripts/script.js"></script>
+    </head>
+    <body onload="webLoad()">
+        <div class="container">
+        <div class="row text-center" style="margin-top:5%">
+            <div class="container">
+                <img class="mb-4" src="images/logo.png" alt="logo" width="100" height="100">
+            </div>  
+        </div>
+        <div class="container" style="background-color:#dcdfe5; padding:10%; width:100%">
+            <div class="row">
+                <div class="container">
+                    <span class="float-right" id="dateLable">DD/MM/YYYY</span>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="container">
+                    <h3>Humanity First Publicity Consent Form</h3>
+                </div>
+            </div>
+            <div class="row text-center" style="margin-top:5%;">
+                <div class="container">
+                    <h5>To gain consent for photography, video and written case studies</h5>
+                </div>
+            </div>
+            <div class="row text-center" style="margin-top:3%;">
+                <div class="container">
+                    <h6>How will your photo, video or written case study be used?</h6>
+                </div>
+            </div>
+            <div class="row" style="margin-top:3%;">
+                <div class="container">
+                    <ul>
+                        <li>In printed marketing materials (e.g. a leaflet to promote Humanity First)</li>
+                        <li>On the Humanity First website or social media sites</li>
+                        <li>In the media (e.g. to promote the charity in a newspaper or on TV)</li>
+                        <li>In our printed or online advertising</li>
+                        <li>By other organisations that want to promote the charity’s work (e.g. schools, colleges, funding bodies and private sector organisations)</li>
+                    </ul>
+                    <p>It will be used until you ask us to stop using it.</p>
+                    <p>Please tick to give your consent</p>
+                    <table class="table borderless">
+                        <tr>
+                            <td style="border:none;"><input type="checkbox" id="consent1" style="margin-right:1%;margin-bottom: 1%"></td>
+                            <td style="border:none;"><span style="margin-bottom: 3%">I understand my right to ask to see any information held about me by Humanity First.</span></td>
+                        </tr>
+                        <tr>
+                            <td style="border:none;"><input type="checkbox" id="consent2" style="margin-right:1%; margin-bottom: 1%"></td>
+                            <td style="border:none;"><span style="margin-bottom: 3%">I also understand that while Humanity First makes every effort to ensure all media coverage is positive, the Charity does not have final control over how a journalist may portray me.</span></td>
+                        </tr>
+                        <tr>
+                            <td style="border:none;"><input type="checkbox" id="consent3" style="margin-right:1%; margin-bottom: 1%"></td>
+                            <td style="border:none;"><span style="margin-bottom: 3%">Humanity First will only pass your information on to third parties with your consent or where we are required to do so by law. You can write to us if you would like to see any information which we hold about you. We will provide this information in line with the Data Protection Act.</span></td>
+                        </tr>
+                    </table>
+                    <p>Details of person giving consent:</p>
+                    <!-- <p>Name :</p> -->
+                    <table class="table borderless">
+                        <tr>
+                            <td style="border: none">Name :</td>
+                            <td style="border: none"><input type="text" class="inputs" id="name"></td>
+                        </tr>
+                        <tr>
+                            <td style="border: none">Email :</td>
+                            <td style="border: none"><input type="text" class="inputs" id="email"></td>
+                        </tr>
+                        <tr>
+                            <td style="border: none">Contact :</td>
+                            <td style="border: none"><input type="text" class="inputs" id="contactNo"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <p>If you are under 16, consent is required from a parent or guardian:</p>
+                    <table class="table borderless">
+                        <tr>
+                            <td style="border: none">Parent/guardian name:</td>
+                            <td style="border: none"><input type="text" class="inputs" id="parentGuardianName"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <div class="row">
+                        <div class="container">
+                            <span style="background-color:aqua; width:30%; height:100px" class="float-right">siganture</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="container signDate">
+                            <input type="date" class="inputs float-right">
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class= "container" style="text-align:center">
+                                <input type="submit" class="btn btn-success col-md-12" style="border-radius: 13px; height: 45px; margin-top: 10%;" value="Submit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container alert alert-success" style="text-align:center; display: none;" id="successToast">
+                            <strong>Success!</strong> Record Created.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <br>
+        <footer class="page-footer font-small blue">
+            <div class="text-center">
+                <p class="footerText">UK Charity Registration NO.1149693, Registered in England and Wales with Company No. 08253779</p>
+                <p class="footerText">Unit 27 Red Line Business Park, Red Lion Road, Surbiton, KT6 7QD, Tel:+44(0)2084170082Fax:+44(0)2084170110</p>
+                <p class="footerText">Web: uk.humanityfirst.org Email: info@humanityfirst.org.uk</p>
+            </div>
+        </footer>
+        <footer class="page-footer font-small blue" style="font-size: 3%">
+            <div class="footer-copyright text-center py-3">© 2018 Copyright:
+                <a href="https://www.fiverr.com/s2/2eeb646318?utm_source=CopyLink_Mobile"> Shakye</a>
+            </div>
+        </footer>
+    </div>
+    </body>
+</html>
