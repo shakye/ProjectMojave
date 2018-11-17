@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="stylesheets/style.css">
         <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
         <script src="scripts/script.js"></script>
+        <link rel="stylesheet" href="stylesheets/signature-pad.css">
     </head>
     <body onload="webLoad()">
         <div class="container">
@@ -20,7 +21,7 @@
                 <img class="mb-4" src="images/logo.png" alt="logo" width="100" height="100">
             </div>  
         </div>
-        <div class="container" style="background-color:#dcdfe5; padding:10%; width:100%">
+        <div class="container" style="background-color:#ebedf1; padding:10%; width:100%">
             <div class="row">
                 <div class="container">
                     <span class="float-right" id="dateLable">DD/MM/YYYY</span>
@@ -52,66 +53,86 @@
                     </ul>
                     <p>It will be used until you ask us to stop using it.</p>
                     <p>Please tick to give your consent</p>
-                    <table class="table borderless">
-                        <tr>
-                            <td style="border:none;"><input type="checkbox" id="consent1" style="margin-right:1%;margin-bottom: 1%"></td>
-                            <td style="border:none;"><span style="margin-bottom: 3%">I understand my right to ask to see any information held about me by Humanity First.</span></td>
-                        </tr>
-                        <tr>
-                            <td style="border:none;"><input type="checkbox" id="consent2" style="margin-right:1%; margin-bottom: 1%"></td>
-                            <td style="border:none;"><span style="margin-bottom: 3%">I also understand that while Humanity First makes every effort to ensure all media coverage is positive, the Charity does not have final control over how a journalist may portray me.</span></td>
-                        </tr>
-                        <tr>
-                            <td style="border:none;"><input type="checkbox" id="consent3" style="margin-right:1%; margin-bottom: 1%"></td>
-                            <td style="border:none;"><span style="margin-bottom: 3%">Humanity First will only pass your information on to third parties with your consent or where we are required to do so by law. You can write to us if you would like to see any information which we hold about you. We will provide this information in line with the Data Protection Act.</span></td>
-                        </tr>
-                    </table>
-                    <p>Details of person giving consent:</p>
-                    <!-- <p>Name :</p> -->
-                    <table class="table borderless">
-                        <tr>
-                            <td style="border: none">Name :</td>
-                            <td style="border: none"><input type="text" class="inputs" id="name"></td>
-                        </tr>
-                        <tr>
-                            <td style="border: none">Email :</td>
-                            <td style="border: none"><input type="text" class="inputs" id="email"></td>
-                        </tr>
-                        <tr>
-                            <td style="border: none">Contact :</td>
-                            <td style="border: none"><input type="text" class="inputs" id="contactNo"></td>
-                        </tr>
-                    </table>
-                    <br>
-                    <br>
-                    <p>If you are under 16, consent is required from a parent or guardian:</p>
-                    <table class="table borderless">
-                        <tr>
-                            <td style="border: none">Parent/guardian name:</td>
-                            <td style="border: none"><input type="text" class="inputs" id="parentGuardianName"></td>
-                        </tr>
-                    </table>
-                    <br>
-                    <div class="row">
-                        <div class="container">
-                            <span style="background-color:aqua; width:30%; height:100px" class="float-right">siganture</span>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="container signDate">
-                            <input type="date" class="inputs float-right">
-                        </div>
-                    </div>
-                    <div class="container">
+                        <table class="table borderless">
+                            <tr>
+                                <td style="border:none;"><input type="checkbox" id="consent1" style="margin-right:1%;margin-bottom: 1%"></td>
+                                <td style="border:none;"><span style="margin-bottom: 3%" id="c1Lbl">I understand my right to ask to see any information held about me by Humanity First.</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;"><input type="checkbox" id="consent2" style="margin-right:1%; margin-bottom: 1%"></td>
+                                <td style="border:none;"><span style="margin-bottom: 3%" id="c1Lbl2">I also understand that while Humanity First makes every effort to ensure all media coverage is positive, the Charity does not have final control over how a journalist may portray me.</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;"><input type="checkbox" id="consent3" style="margin-right:1%; margin-bottom: 1%"></td>
+                                <td style="border:none;"><span style="margin-bottom: 3%" id="c1Lbl3">Humanity First will only pass your information on to third parties with your consent or where we are required to do so by law. You can write to us if you would like to see any information which we hold about you. We will provide this information in line with the Data Protection Act.</span></td>
+                            </tr>
+                        </table>
+                        <p>Details of person giving consent:</p>
+                        <!-- <p>Name :</p> -->
+                        <table class="table borderless">
+                            <tr>
+                                <td style="border: none" id="nameLbl">Name :</td>
+                                <td style="border: none"><input type="text" class="inputs" id="name"></td>
+                            </tr>
+                            <tr>
+                                <td style="border: none;" id="eLbl">Email :</td>
+                                <td style="border: none"><input type="email" class="inputs" id="email"></td>
+                            </tr>
+                            <tr>
+                                <td style="border: none" id="contactLbl">Contact :</td>
+                                <td style="border: none"><input type="text" class="inputs" id="contactNo"></td>
+                            </tr>
+                        </table>
+                        <br>
+                        <br>
+                        <p>If you are under 16, consent is required from a parent or guardian:</p>
+                        <table class="table borderless">
+                            <tr>
+                                <td style="border: none">Parent/guardian name:</td>
+                                <td style="border: none"><input type="text" class="inputs" id="parentGuardianName"></td>
+                            </tr>
+                        </table>
+                        <br>
                         <div class="row">
-                            <div class= "container" style="text-align:center">
-                                <input type="submit" class="btn btn-success col-md-12" style="border-radius: 13px; height: 45px; margin-top: 10%;" value="Submit">
+                            <div class="container">
+                                <div id="signature-pad" class="signature-pad">
+                                    <div class="signature-pad--body">
+                                        <canvas></canvas>
+                                    </div>
+                                    <div class="signature-pad--footer">
+                                        <div class="description">Sign above</div>
+                                
+                                        <div class="signature-pad--actions">
+                                        <div>
+                                            <button type="button" class="button clear" data-action="clear">Clear</button>
+                                            <button type="button" class="button" data-action="undo">Undo</button>
+                                
+                                        </div>
+                                        <!-- <div>
+                                            <button type="button" class="button save" data-action="save-png">Save as PNG</button>
+                                            <button type="button" class="button save" data-action="save-jpg">Save as JPG</button>
+                                            <button type="button" class="button save" data-action="save-svg">Save as SVG</button>
+                                        </div> -->
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <br>
+                        <div class="row">
+                            <div class="container signDate">
+                                <input type="date" class="inputs float-right">
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class= "container" style="text-align:center">
+                                    <input type="submit" class="btn btn-success col-md-12" style="border-radius: 13px; height: 45px; margin-top: 10%;" onclick="submitData()" value="Submit">
+                                </div>
+                            </div>
+                        </div>
                     <div class="row">
-                        <div class="container alert alert-success" style="text-align:center; display: none;" id="successToast">
+                        <div class="container alert" style="text-align:center; display: none;" id="successToast">
                             <strong>Success!</strong> Record Created.
                         </div>
                     </div>
@@ -133,5 +154,7 @@
             </div>
         </footer>
     </div>
+    <script src="scripts/signature_pad.umd.js"></script>
+    <script src="scripts/app.js"></script>
     </body>
 </html>
