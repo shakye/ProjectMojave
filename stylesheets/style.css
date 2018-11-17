@@ -16,3 +16,8 @@
     margin: 0;
     font-size:12px;
 }
+
+#usertable a:hover {
+    cursor: pointer;
+    color: blue;
+}
