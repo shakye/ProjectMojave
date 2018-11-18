@@ -1,18 +1,20 @@
 var entries = [];
 
+// Initialize Firebase
 var config = {
-    apiKey: "AIzaSyB7wo51xy2h4_WGXJ_K7SPN4In5R6tb_-A",
-    authDomain: "projecthamidasif-83639.firebaseapp.com",
-    databaseURL: "https://projecthamidasif-83639.firebaseio.com",
-    projectId: "projecthamidasif-83639",
-    storageBucket: "projecthamidasif-83639.appspot.com",
-    messagingSenderId: "146110704053"
-};
-firebase.initializeApp(config);
+    apiKey: "AIzaSyDfUsroZtEB58juvswM4JHchY1g0OpqOvU",
+    authDomain: "signatureform-fc047.firebaseapp.com",
+    databaseURL: "https://signatureform-fc047.firebaseio.com",
+    projectId: "signatureform-fc047",
+    storageBucket: "signatureform-fc047.appspot.com",
+    messagingSenderId: "723895911130"
+  };
+  firebase.initializeApp(config);
 
 var dbRef = firebase.database();
 var consentDataRef = dbRef.ref('consentFormData');
 
+var downloadFile = false;
 
 
 function webLoad(){
@@ -92,18 +94,21 @@ function populateTable() {
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
 
         var key = childData.uniqueKey;
       
         var name=childData.name;
         var email=childData.email;
         var contact=childData.contactNo;
-
+        var date=childData.date;
+        var parentGuardianName=childData.parentGuardianName;
 
         cell1.innerHTML = childData.name;
         cell2.innerHTML = childData.email;
         cell3.innerHTML = childData.date;
-        cell4.innerHTML = "<a onclick='getSignature(\""+key+"\",\""+name+"\",\""+email+"\",\""+contact+"\")'>View</a>";
+        cell4.innerHTML = "<a onclick='getSignature(\""+key+"\",\""+name+"\",\""+email+"\",\""+contact+"\",\""+date+"\",\""+parentGuardianName+"\")'>View</a>";
+        cell5.innerHTML = "<a onclick='getSignature(\""+key+"\",\""+name+"\",\""+email+"\",\""+contact+"\",\""+date+"\",\""+parentGuardianName+"\"); setDownload()'>Download</a>";
     }
 
     // onClickListener();
@@ -115,7 +120,7 @@ function onClick() {
 
 var resImg;
 
-function generatePDF(name,email,contact) {
+function generatePDF(name,email,contact,date,parentGuardianName) {
 
     var docDefinition = {
         content: [
@@ -125,10 +130,12 @@ function generatePDF(name,email,contact) {
                 height: 100,
                 style:'imgstyle'
           },
-          { text: 'Humanity First Publicity Consent Form', style: 'header',margin: [ 0, 20, 0, 0 ] },
-          { text: 'To gain consent for photography, video and written case studies', style: 'anotherStyle' },
-          { text: 'How will your photo, video or written case study be used?', style: 'anotherStyle' },
+          { text:  date, style: 'dateStyle', margin: [0,0,20,0]},
+          { text: 'Humanity First Publicity Consent Form', style: 'header',margin: [ 0, 10, 0, 0 ] },
+          { text: 'To gain consent for photography, video and written case studies', style: 'anotherStyle', margin: [ 0, 10, 0, 0 ] },
+          { text: 'How will your photo, video or written case study be used?', style: 'anotherStyle', margin: [ 0, 10, 0, 10 ] },
           {
+                style: 'ulList',
                 ul: [
                     'In printed marketing materials (e.g. a leaflet to promote Humanity First)',
                     'On the Humanity First website or social media sites',
@@ -137,22 +144,50 @@ function generatePDF(name,email,contact) {
                     'By other organisations that want to promote the charity’s work (e.g. schools, colleges, funding bodies and private sector organisations)',
                 ]
             },
-          { text:'It will be used until you ask us to stop using it',style:'style1',margin: [ 0, 20, 0, 0 ]},
+          { text:'It will be used until you ask us to stop using it',style:'style1',margin: [ 0, 15, 0, 0 ]},
           { text:'Please tick to give your consent',style:'style1'},
           { text:'I understand my right to ask to see any information held about me by Humanity First.',style:'style1'},
-          { text:'I also understand that while Humanity First makes every effort to ensure all media coverage is positive, the Charity does not have final control over how a journalist may portray me.',margin: [ 0, 0, 0, 15 ]},
-          { text:'I also understand that while Humanity First makes every effort to ensure all media coverage is positive, the Charity does not have final control over how a journalist may portray me.',margin: [ 0, 0, 0, 15]},
+          { text:'I also understand that while Humanity First makes every effort to ensure all media coverage is positive, the Charity does not have final control over how a journalist may portray me.',margin: [ 0, 0, 0, 12 ]},
+          { text:'I also understand that while Humanity First makes every effort to ensure all media coverage is positive, the Charity does not have final control over how a journalist may portray me.',margin: [ 0, 0, 0, 12]},
           { text:'Details of person giving consent:',style:'style1'},
-          { text:'Name:'+" "+ name,style:'style1'},
-          { text:'Email:'+" "+email,style:'style1'},
-          { text:'Contact:'+" "+contact,style:'style1'},
-          { text:'If you are under 16, consent is required from a parent or guardian:',style:'style1'},
-          { text:'Parent/guardian name:',style:'style1'},
+          
+          
+          {
+			style: 'tableExample',
+			table: {
+				headerRows: 1,
+				body: [
+					[{text: '', style: 'tableHeader'}, {text: '', style: 'tableHeader'},{text: '', style: 'tableHeader'}],
+					['Name', " :- ", name],
+					['Email'," :- ", email],
+					['Contact'," :- ", contact],
+				]
+			},
+			layout: 'noBorders'
+		  },
+
+
+
+          
+          
+          
+          
+          
+          //{ text:'Name:'+" "+ name,style:'style1'},
+          //{ text:'Email:'+" "+email,style:'style1'},
+          //{ text:'Contact:'+" "+contact,style:'style1'},
+          { text:'If you are under 16, consent is required from a parent or guardian:',style:'style1',margin: [ 0, 10, 0, 0]},
+          { text:'Parent/Guardian name:'+" "+parentGuardianName,style:'style1'},
           {
             image:'mySuperImage',   
-            width:100,
-            height:80,
-          }
+            width:170,
+            height:73,
+          },
+          //{ text: 'Signature',style:'signature',margin: [10,0,0,0]},
+          { text:'UK Charity Registration NO.1149693, Registered in England and Wales with Company No. 08253779',style:'footerStyle',margin:[0,50,0,0]},
+          { text:'Unit 27 Red Line Business Park, Red Lion Road, Surbiton, KT6 7QD,',style:'footerStyle'},
+          { text:'Tel:+44(0)2084170082Fax:+44(0)2084170110',style:'footerStyle'},
+          { text:'Web: uk.humanityfirst.org Email: info@humanityfirst.org.uk',style:'footerStyle'},
 
         ],
 
@@ -163,14 +198,14 @@ function generatePDF(name,email,contact) {
      
         styles: {
           header: {
-            fontSize: 22,
+            fontSize: 20,
             bold: true,
-            lineHeight: 2,
+            lineHeight: 1,
             alignment:'center'
           },
           anotherStyle: {
             italic: true,
-            lineHeight: 2,
+            lineHeight: 1,
             alignment: 'center'
           },
           style1: {
@@ -181,6 +216,20 @@ function generatePDF(name,email,contact) {
           },
           imgstyle:{
             alignment:'center'
+          },
+          dateStyle:{
+            alignment:'right',
+            fontSize:8
+          },
+          footerStyle:{
+            alignment:'center',
+            fontSize:5
+          },
+          signature:{
+            fontSize:8,
+          },
+          ulList:{
+            fontSize:10,
           }
 
         },
@@ -188,9 +237,14 @@ function generatePDF(name,email,contact) {
       };
       
       
-      //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
+      
       pdfMake.createPdf(docDefinition).open();
 
+      if(getDownload()){
+        pdfMake.createPdf(docDefinition).download('optionalName.pdf');
+      }
+
+      downloadFile = false;
       //name="";
       //email="";
       //contact="";
@@ -199,7 +253,7 @@ function generatePDF(name,email,contact) {
 
 
 
-function getSignature(uniqueKey,name,email,contact){
+function getSignature(uniqueKey,name,email,contact,date,parentGuardianName){
 
     var storageRef = firebase.storage().ref();
     storageRef.child('signatures/'+uniqueKey).getDownloadURL().then(function (url) {
@@ -216,7 +270,7 @@ function getSignature(uniqueKey,name,email,contact){
                 base64data = reader.result;
                 console.log(base64data);
                 resImg = base64data;
-                generatePDF(name,email,contact);
+                generatePDF(name,email,contact,date,parentGuardianName);
             }
             //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
         };
@@ -298,4 +352,13 @@ function submitData() {
 
     }
     
+}
+
+
+function setDownload(){
+    downloadFile = true;
+}
+
+function getDownload(){
+    return downloadFile;
 }
