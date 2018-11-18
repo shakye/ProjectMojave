@@ -174,14 +174,11 @@ function validateData(){
     statusToast.style.color ="red";
     statusToast.style.display ="block";
   }  
-  else {
+  if(nameField.value!="" && emailField.value!="" && contactNo.value!=" " && consent1.checked==true && consent2.checked==true && consent3.checked==true && !(signaturePad.isEmpty())){
     var dataURL = signaturePad.toDataURL();
     //download(dataURL, "signature.png");
     statusToast.innerHTML = "Success!";
     statusToast.style.color ="green";
-  }
-
-  if(nameField.value!="" && emailField.value!="" && contactNo.value!=" " && consent1.checked==true && consent2.checked==true && consent3.checked==true && !(signaturePad.isEmpty())){
     submitData();
   }
 }
