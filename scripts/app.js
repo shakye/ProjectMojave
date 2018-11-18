@@ -131,7 +131,7 @@ undoButton.addEventListener("click", function (event) {
 //     download(dataURL, "signature.svg");
 //   }
 // });
-function submitData(){
+function validateData(){
   console.log(emailField.value);
   if(nameField.value ==""){
     statusToast.innerHTML = "Please fill all the fields";
@@ -174,10 +174,15 @@ function submitData(){
     statusToast.style.color ="red";
     statusToast.style.display ="block";
   }  
-  else {
+  if(nameField.value!="" && emailField.value!="" && contactNo.value!=" " && consent1.checked==true && consent2.checked==true && consent3.checked==true && !(signaturePad.isEmpty())){
     var dataURL = signaturePad.toDataURL();
-    download(dataURL, "signature.png");
+    //download(dataURL, "signature.png");
     statusToast.innerHTML = "Success!";
     statusToast.style.color ="green";
+    submitData();
   }
+}
+
+function getSignaturePad(){
+  return signaturePad;
 }
