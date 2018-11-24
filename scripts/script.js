@@ -1,7 +1,7 @@
 var entries = [];
 
-// Initialize Firebase
-var config = {
+ // Initialize Firebase
+ var config = {
     apiKey: "AIzaSyDfUsroZtEB58juvswM4JHchY1g0OpqOvU",
     authDomain: "signatureform-fc047.firebaseapp.com",
     databaseURL: "https://signatureform-fc047.firebaseio.com",
@@ -241,7 +241,7 @@ function generatePDF(name,email,contact,date,parentGuardianName) {
       pdfMake.createPdf(docDefinition).open();
 
       if(getDownload()){
-        pdfMake.createPdf(docDefinition).download('optionalName.pdf');
+        pdfMake.createPdf(docDefinition).download('Consent_Form-'+name+'.pdf');
       }
 
       downloadFile = false;
